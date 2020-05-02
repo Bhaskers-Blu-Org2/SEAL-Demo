@@ -135,7 +135,7 @@ namespace SEALAzureFuncClient
         /// <param name="code">Azure function key</param>
         private async Task<bool> QueryPublicKeys(string sid, string keyType, string code)
         {
-            // Query keys for given sid 
+            // Query keys for given sid
             Uri function = GetUri("PublicKeysQuery", code);
             string json = $"{{ \"sid\": \"{sid}\", \"type\": \"{keyType}\" }}";
             HttpContent content = new StringContent(json, Encoding.UTF8);
@@ -157,7 +157,7 @@ namespace SEALAzureFuncClient
 
         /// <summary>
         /// Upload public keys of a given type to the Azure Functions server.
-        /// 
+        ///
         /// RelinKeys and GaloisKeys are needed in order to reduce size of the transmitted
         /// ciphertexts (through relinearization), or to perform element rotations needed
         /// for multiplication.
@@ -188,7 +188,7 @@ namespace SEALAzureFuncClient
                     return false;
             };
 
-            // Upload RelinKeys for given sid 
+            // Upload RelinKeys for given sid
             Uri function = GetUri("PublicKeysUpload", code);
             string json = $"{{ \"sid\": \"{sid}\", \"type\": \"{keyType}\", \"key\": \"{b64key}\" }}";
             HttpContent content = new StringContent(json, Encoding.UTF8);
@@ -220,7 +220,7 @@ namespace SEALAzureFuncClient
         /// <returns></returns>
         private async Task<bool> DeletePublicKeys(string sid, string keyType, string code)
         {
-            // Delete RelinKeys for given sid 
+            // Delete RelinKeys for given sid
             Uri function = GetUri("PublicKeysDelete", code);
             string json = $"{{ \"sid\": \"{sid}\", \"type\": \"{keyType}\" }}";
             HttpContent content = new StringContent(json, Encoding.UTF8);
@@ -274,7 +274,7 @@ namespace SEALAzureFuncClient
 
         /// <summary>
         /// Perform a Matrix multiplication.
-        /// 
+        ///
         /// Please refer to the file MATRIXMULTIPLICATION.md for an explanation of
         /// how matrix multiplication is implemented in this application.
         /// </summary>
@@ -283,7 +283,7 @@ namespace SEALAzureFuncClient
             ClearLog();
             Log($"Session ID: {sid}");
 
-            // Query RelinKeys with given sid 
+            // Query RelinKeys with given sid
             if (!await QueryPublicKeys(sid, "RelinKeys", GlobalProperties.Codes.PublicKeysQuery))
             {
                 // Upload RelinKeys if needed
@@ -296,7 +296,7 @@ namespace SEALAzureFuncClient
                 }
             }
 
-            // Query GaloisKeys with given sid 
+            // Query GaloisKeys with given sid
             if (!await QueryPublicKeys(sid, "GaloisKeys", GlobalProperties.Codes.PublicKeysQuery))
             {
                 // Upload GaloisKeys if needed

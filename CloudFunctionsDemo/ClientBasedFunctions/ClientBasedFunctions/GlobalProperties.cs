@@ -43,7 +43,7 @@ namespace SEALAzureFuncClient
         /// <summary>
         /// Modulus for Plaintext. Since we use BatchEncoder in this demo, we
         /// need PlainModulus to be a prime number congruent to 2*PolyModulusDegree.
-        /// The range of values the result matrix slots can contain is 
+        /// The range of values the result matrix slots can contain is
         /// [-127*128*MatrixSizeMax, 128*128*MatrixSizeMax], we need PlainModulus
         /// to be such that 128*128*MatrixSizeMax < PlainModulus / 2.
         /// </summary>
@@ -64,7 +64,7 @@ namespace SEALAzureFuncClient
                     {
                         PolyModulusDegree = PolyModulusDegree,
                         CoeffModulus = CoeffModulus.BFVDefault(polyModulusDegree: PolyModulusDegree),
-                        PlainModulus = new SmallModulus(GlobalProperties.PlainModulus)
+                        PlainModulus = new Modulus(GlobalProperties.PlainModulus)
                     };
                     context_ = new SEALContext(parms);
                 }

@@ -268,7 +268,7 @@ namespace SEALAzureFuncClient
         {
             using (MemoryStream ms = new MemoryStream())
             {
-                encryptor.EncryptSymmetricSave(plain, ms);
+                encryptor.EncryptSymmetric(plain).Save(ms);
                 byte[] bytes = ms.ToArray();
                 return Convert.ToBase64String(bytes);
             }
@@ -286,7 +286,7 @@ namespace SEALAzureFuncClient
             {
                 foreach (Plaintext plain in plains)
                 {
-                    encryptor.EncryptSymmetricSave(plain, ms);
+                    encryptor.EncryptSymmetric(plain).Save(ms);
                 }
                 byte[] bytes = ms.ToArray();
                 return Convert.ToBase64String(bytes);
@@ -351,7 +351,7 @@ namespace SEALAzureFuncClient
             using (MemoryStream ms = new MemoryStream())
             {
                 // Saving directly to stream; this compresses the size in half
-                keygen.RelinKeysSave(ms);
+                keygen.RelinKeys().Save(ms);
                 byte[] bytes = ms.ToArray();
                 return Convert.ToBase64String(bytes);
             }
@@ -367,7 +367,7 @@ namespace SEALAzureFuncClient
             using (MemoryStream ms = new MemoryStream())
             {
                 // Saving directly to stream; this compresses the size in half
-                keygen.GaloisKeysSave(rotations, ms);
+                keygen.GaloisKeys(rotations).Save(ms);
                 byte[] bytes = ms.ToArray();
                 return Convert.ToBase64String(bytes);
             }
@@ -401,7 +401,7 @@ namespace SEALAzureFuncClient
             int inRows = matrix.GetLength(dimension: 0);
             int inCols = matrix.GetLength(dimension: 1);
             int[,] result = new int[inCols, inRows];
-            
+
             for (int r = 0; r < inRows; r++)
             {
                 for (int c = 0; c < inCols; c++)

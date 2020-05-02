@@ -46,7 +46,7 @@ namespace Microsoft.Research.SEALDemo
             {
                 if (!GlobalProperties.GaloisKeys.ContainsKey(sid))
                 {
-                    result = GlobalProperties.GaloisKeys.Remove(sid) 
+                    result = GlobalProperties.GaloisKeys.Remove(sid)
                         ? (IActionResult)new OkResult() : (IActionResult)new BadRequestResult();
                 }
             }
